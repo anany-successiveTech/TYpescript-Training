@@ -1,0 +1,21 @@
+.input-container {
+  padding: 0.8rem;
+  margin: 0.5rem;
+  border-radius: 0.5rem;
+}
+.dark .input-container input {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgb(41, 39, 39);
+  border: ath ;
+  border: none;
+  color: #fff;
+  font-size: large;
+}
+.light .input-container input {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  font-size: large;
+  background-color: rgb(172, 168, 168);
+}

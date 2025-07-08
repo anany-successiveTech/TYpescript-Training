@@ -1,0 +1,70 @@
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Container styling */
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #292727;
+  color: #dfdbdb;
+}
+
+/* Light mode container overrides */
+.light .container {
+  background-color: #f9f9f9;
+  color: #1f1d1d;
+}
+
+/* Title styling */
+.title {
+  margin-bottom: 20px;
+}
+
+/* Light mode title overrides (optional if same as container color) */
+.light .title {
+  color: #1f1d1d;
+}
+
+/* Input styling */
+.input {
+  padding: 10px;
+  width: 80%;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+/* Button styling */
+.button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+/* Message box styling */
+.message {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #e0f7fa;
+  color: #00796b;
+  border-radius: 5px;
+  font-weight: bold;
+}
