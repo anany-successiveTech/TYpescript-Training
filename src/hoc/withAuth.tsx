@@ -2,9 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { ComponentType } from "react";
 
-const withAuth = (WrappedComponent) => {
-  return function AuthenticatedComponent(props) {
+const withAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
+  const AuthenticatedComponent = (props: P) => {
     const router = useRouter();
 
     useEffect(() => {
@@ -16,6 +17,8 @@ const withAuth = (WrappedComponent) => {
 
     return <WrappedComponent {...props} />;
   };
+
+  return AuthenticatedComponent;
 };
 
 export default withAuth;

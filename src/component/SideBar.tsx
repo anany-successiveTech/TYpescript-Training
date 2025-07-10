@@ -45,13 +45,13 @@ const NavbarDrawer = () => {
     6: 1,
   };
 
-  const handleAssignmentClick = (assignmentNo:number) => {
+  const handleAssignmentClick = (assignmentNo: number) => {
     setActiveAssignment(
       assignmentNo === activeAssignment ? null : assignmentNo
     );
   };
 
-  const handleQuestionClick = (assignmentNo:number, questionNo:number) => {
+  const handleQuestionClick = (assignmentNo: number, questionNo: number) => {
     router.push(`/assignment-${assignmentNo}/question-${questionNo}`);
     setOpenDrawer(false);
   };
@@ -79,9 +79,14 @@ const NavbarDrawer = () => {
           <button
             onClick={() => router.push("/assessment")}
             style={{
-              padding: "0.2rem 0.5rem",
-              margin: "0rem 0.5rem",
-              fontSize: "large",
+              color: "#fff",
+              border: "none",
+              borderRadius: "4px",
+              padding: "6px 12px",
+              marginRight: "1rem",
+              cursor: "pointer",
+              fontSize: "0.9rem",
+              backgroundColor:"#4285f4"
             }}
           >
             Assessment

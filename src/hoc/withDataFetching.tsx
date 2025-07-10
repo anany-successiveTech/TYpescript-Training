@@ -1,7 +1,10 @@
+"use client";
+
+import { ComponentType } from "react";
 import { use } from "react";
 
-const withDataFetching = (WrappedComponent) => {
-  return function FetchedDataComponent(props) {
+const withDataFetching = <P extends object>(WrappedComponent: ComponentType<P & { data: any[] }>) => {
+  const FetchedDataComponent = (props: P) => {
     const fetchData = async () => {
       const res = await fetch("https://jsonplaceholder.typicode.com/users");
 
@@ -10,13 +13,15 @@ const withDataFetching = (WrappedComponent) => {
       }
 
       const data = await res.json();
-      return data;
+      return data as any[];
     };
 
-    const data = use(fetchData()); 
+    const data = use(fetchData());
 
     return <WrappedComponent {...props} data={data} />;
   };
+
+  return FetchedDataComponent;
 };
 
 export default withDataFetching;
