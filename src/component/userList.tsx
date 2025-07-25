@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import "@/app/styles/a5q11.css";
+import "@/app/styles/a5q11.css"
 
 interface User {
   id: number;
@@ -13,7 +13,7 @@ interface UserListProps {
   data: User[];
 }
 
-export default function UserList({ data }: UserListProps) {
+export default function UserListWithData({ data }: UserListProps) {
   return (
     <div className="userListWrapper">
       <h2 className="userListTitle">User List</h2>

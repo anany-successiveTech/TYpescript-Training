@@ -1,29 +1,23 @@
-import { useState } from "react";
+"use client";
 
-/**
- * A strongly typed custom hook for localStorage access.
- * @param key The localStorage key to use.
- * @param initialValue The initial value if nothing is found.
- * @returns A tuple: [setValue, removeValue, getStoredValue]
- */
+import { useState, useEffect } from "react";
+
 function useLocalestorage<T>(
   key: string,
   initialValue: T
-): [(value: T) => void, () => void, () => T] {
-  // Reads value from localStorage or returns the initial value
-  const getStoredValue = (): T => {
+): [(value: T) => void, () => void, T | undefined] {
+  const [storedValue, setStoredValue] = useState<T | undefined>(undefined);
+
+  useEffect(() => {
     try {
       const item = localStorage.getItem(key);
-      return item ? (JSON.parse(item) as T) : initialValue;
+      setStoredValue(item ? (JSON.parse(item) as T) : initialValue);
     } catch (error) {
       console.error(`Error getting item from localStorage for key "${key}":`, error);
-      return initialValue;
+      setStoredValue(initialValue);
     }
-  };
+  }, [key]);
 
-  const [storedValue, setStoredValue] = useState<T>(getStoredValue);
-
-  // Save new value to state and localStorage
   const setValue = (value: T): void => {
     try {
       setStoredValue(value);
@@ -33,7 +27,6 @@ function useLocalestorage<T>(
     }
   };
 
-  // Remove value from localStorage and reset state
   const removeValue = (): void => {
     try {
       localStorage.removeItem(key);
@@ -43,7 +36,7 @@ function useLocalestorage<T>(
     }
   };
 
-  return [setValue, removeValue, getStoredValue];
+  return [setValue, removeValue, storedValue];
 }
 
 export default useLocalestorage;

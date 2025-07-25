@@ -1,33 +1,20 @@
+// app/assignment-5/question-11/page.tsx
 "use client";
 
-import { ComponentType, FC } from "react";
-import { use } from "react";
+import UserListWithData from "@/component/userList"
+const fakeUsers = [
+  { id: 1, name: "Alice Johnson", email: "alice@example.com" },
+  { id: 2, name: "Bob Smith", email: "bob@example.com" },
+  { id: 3, name: "Charlie Brown", email: "charlie@example.com" },
+  { id: 4, name: "Diana Prince", email: "diana@example.com" },
+  { id: 5, name: "Evan Lee", email: "evan@example.com" },
+];
 
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
-interface WithUserDataProps {
-  data: User[];
-}
-
-export default function withDataFetching(
-  WrappedComponent: ComponentType<WithUserDataProps>
-): ComponentType {
-  const FetchedDataComponent: FC = () => {
-    const fetchData = async () => {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
-      if (!res.ok) throw new Error("Failed to fetch data");
-      const data = await res.json();
-      return data as User[];
-    };
-
-    const data = use(fetchData());
-
-    return <WrappedComponent data={data} />;
-  };
-
-  return FetchedDataComponent;
+export default function Question11Page() {
+  return (
+    <div>
+      <h1>User List</h1>
+      <UserListWithData data={fakeUsers} />
+    </div>
+  );
 }

@@ -1,27 +1,47 @@
 "use client";
 
-import { ComponentType } from "react";
-import { use } from "react";
+import { ComponentType, FC, useEffect, useState } from "react";
 
-const withDataFetching = <P extends object>(WrappedComponent: ComponentType<P & { data: any[] }>) => {
-  const FetchedDataComponent = (props: P) => {
-    const fetchData = async () => {
-      const res = await fetch("https://jsonplaceholder.typicode.com/users");
+interface User {
+  id: number;
+  name: string;
+  email: string;
+}
 
-      if (!res.ok) {
-        throw new Error("Failed to fetch data");
-      }
+interface WithUserDataProps {
+  data: User[];
+}
 
-      const data = await res.json();
-      return data as any[];
-    };
+export default function withDataFetching(
+  WrappedComponent: ComponentType<WithUserDataProps>
+): ComponentType {
+  const FetchedDataComponent: FC = () => {
+    const [data, setData] = useState<User[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<null | string>(null);
 
-    const data = use(fetchData());
+    useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const res = await fetch("https://jsonplaceholder.typicode.com/users");
+          if (!res.ok) throw new Error("Failed to fetch data");
+          const json = await res.json();
+          setData(json);
+        } catch (err: any) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    return <WrappedComponent {...props} data={data} />;
+      fetchData();
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
+
+    return <WrappedComponent data={data} />;
   };
 
   return FetchedDataComponent;
-};
-
-export default withDataFetching;
+}

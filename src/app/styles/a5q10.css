@@ -1,0 +1,18 @@
+.pageWrapper {
+  padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9fafb;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+}
