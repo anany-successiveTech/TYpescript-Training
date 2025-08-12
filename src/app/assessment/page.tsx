@@ -1,19 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "@/app/styles/game.css";
 import Alert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 import Typography from "@mui/material/Typography";
 
 const TicTacToe: React.FC = () => {
+  // State for board cells
   const [cell, setCell] = useState<string[]>(Array(9).fill(""));
+  // Track whose turn it is (X always starts)
   const [player, setPlayer] = useState<"X" | "O">("X");
+  // Winner state
   const [winner, setWinner] = useState<"X" | "O" | "Draw" | null>(null);
+  // Snackbar toggles
   const [snackbarOpen, setSnackbarOpen] = useState<boolean>(false);
   const [winAlertOpen, setWinAlertOpen] = useState<boolean>(false);
 
-  const winningPattern: number[][] = [
+  // All winning combinations
+  type WinningCombination = [number, number, number]; // we are performing index wise type checking.
+  const winningPattern: WinningCombination[] = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -24,6 +30,7 @@ const TicTacToe: React.FC = () => {
     [2, 4, 6],
   ];
 
+  // Check if a player has won or if it's a draw
   const checkWinner = (cells: string[]): void => {
     for (let [a, b, c] of winningPattern) {
       if (cells[a] && cells[a] === cells[b] && cells[a] === cells[c]) {
@@ -38,21 +45,26 @@ const TicTacToe: React.FC = () => {
     }
   };
 
-  const handleClick = (index: number): void => {
+  // Handle click for player move
+  const handleMoveClick = (index: number): void => {
     if (cell[index] !== "" || winner) return;
 
     const newCell = [...cell];
     newCell[index] = "X";
     setCell(newCell);
     checkWinner(newCell);
-
     if (!winner) {
-      setTimeout(() => {
-        makeComputerMove(newCell);
-      }, 500);
+      setPlayer(player === "X" ? "O" : "X"); // switch turns
     }
+
+    // if (!winner) {
+    //   setTimeout(() => {
+    //     makeComputerMove(newCell);
+    //   }, 500);
+    // }
   };
 
+  // Computer makes a random move
   const makeComputerMove = (cells: string[]): void => {
     if (winner) return;
 
@@ -63,14 +75,25 @@ const TicTacToe: React.FC = () => {
 
     if (emptyIndexes.length === 0) return;
 
-    const randomIndex = emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
+    const randomIndex =
+      emptyIndexes[Math.floor(Math.random() * emptyIndexes.length)];
     const newCells = [...cells];
     newCells[randomIndex] = "O";
 
     setCell(newCells);
     checkWinner(newCells);
+    setPlayer("X");
   };
+  // added useEffect for making computers move
+  useEffect(() => {
+    if (player === "O" && !winner) {
+      setTimeout(() => {
+        makeComputerMove(cell);
+      }, 500);
+    }
+  }, [player, winner]);
 
+  // Reset game to initial state
   const handleResetGame = (): void => {
     setCell(Array(9).fill(""));
     setPlayer("X");
@@ -78,7 +101,7 @@ const TicTacToe: React.FC = () => {
     setSnackbarOpen(true);
     setWinAlertOpen(false);
   };
-
+  // Added the map method for rendoring the buttons {optimized version}.
   return (
     <div>
       <div className="ttt-header">
@@ -87,23 +110,16 @@ const TicTacToe: React.FC = () => {
           {winner ? "" : "Your Turn: X"}
         </Typography>
       </div>
-
       <div className="ttt-game-container">
-        <div className="ttt-row">
-          <button onClick={() => handleClick(0)} disabled={Boolean(winner) || cell[0] !== ""}>{cell[0]}</button>
-          <button onClick={() => handleClick(1)} disabled={Boolean(winner) || cell[1] !== ""}>{cell[1]}</button>
-          <button onClick={() => handleClick(2)} disabled={Boolean(winner) || cell[2] !== ""}>{cell[2]}</button>
-        </div>
-        <div className="ttt-row">
-          <button onClick={() => handleClick(3)} disabled={Boolean(winner) || cell[3] !== ""}>{cell[3]}</button>
-          <button onClick={() => handleClick(4)} disabled={Boolean(winner) || cell[4] !== ""}>{cell[4]}</button>
-          <button onClick={() => handleClick(5)} disabled={Boolean(winner) || cell[5] !== ""}>{cell[5]}</button>
-        </div>
-        <div className="ttt-row">
-          <button onClick={() => handleClick(6)} disabled={Boolean(winner) || cell[6] !== ""}>{cell[6]}</button>
-          <button onClick={() => handleClick(7)} disabled={Boolean(winner) || cell[7] !== ""}>{cell[7]}</button>
-          <button onClick={() => handleClick(8)} disabled={Boolean(winner) || cell[8] !== ""}>{cell[8]}</button>
-        </div>
+        {cell.map((cellValue, index) => (
+          <button
+            key={index}
+            onClick={() => handleMoveClick(index)}
+            disabled={Boolean(winner) || cellValue !== ""}
+          >
+            {cellValue}
+          </button>
+        ))}
       </div>
 
       <div className="ttt-controls">

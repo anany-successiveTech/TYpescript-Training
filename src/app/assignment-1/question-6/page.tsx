@@ -6,8 +6,8 @@ import "@/app/styles/colorChanger.css";
 import Input from "@/component/Input";
 
 const App = () => {
-  const [text, setText] = useState<string>("");
-  const [color, setColor] = useState<string>("");
+  const [text, setText] = useState<string | null>(null);
+  const [color, setColor] = useState<string | null>(null);
 
   const handleTextChange = (e: ChangeEvent<HTMLInputElement>) =>
     setText(e.target.value);

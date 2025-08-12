@@ -1,14 +1,12 @@
-import React from 'react';
+import React from "react";
 
-const Weather = ({ temperature }:{temperature:number}) => {
-  if (isNaN(temperature)) {
+const Weather = ({ temperature }: { temperature: number | null }) => {
+  if (temperature === null || isNaN(temperature)) {
     return <h2>Please enter a temperature.</h2>;
   }
 
-  let message = '';
-
+  let message = "";
   if (temperature > 25) {
- 
     message = "It's sunny today!";
   } else if (temperature < 10) {
     message = "It's cold today!";

@@ -7,11 +7,15 @@ const Page = () => {
   const [temperature, setTemperature] = useState("");
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setTemperature(e.target.value);
+    // Added the temperature validation
+    const temperature = e.target.value;
+    if (temperature === "" || !isNaN(Number(temperature))) {
+      setTemperature(temperature);
+    }
   };
 
   return (
-    <div style={{ textAlign: "center", margin: "2rem" }}>
+    <div>
       <div>
         <p style={{ textAlign: "center", margin: "2rem" }}>
           3. Create a functional component named Weather that accepts a prop
@@ -27,7 +31,7 @@ const Page = () => {
         value={temperature}
         onChange={handleInputChange}
       />
-      <Weather temperature={Number(temperature)} />
+      <Weather temperature={temperature === "" ? null : Number(temperature)} />
     </div>
   );
 };

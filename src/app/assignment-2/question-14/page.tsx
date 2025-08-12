@@ -26,9 +26,7 @@ const Page: React.FC = () => {
 
   const completeTask = useCallback((id: number) => {
     setTasks((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, completed: true } : task
-      )
+      prev.map((task) => (task.id === id ? { ...task, completed: true } : task))
     );
   }, []);
 
@@ -53,6 +51,8 @@ const Page: React.FC = () => {
 };
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, onComplete }) => {
+  const isCompeted = task.completed;
+  const buttonLable = isCompeted ? "Completed" : "Complete";
   return (
     <div className="task-item">
       <span className={`task-name ${task.completed ? "completed" : ""}`}>
@@ -63,7 +63,7 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, onComplete }) => {
         disabled={task.completed}
         className="complete-btn"
       >
-        {task.completed ? "Completed" : "Complete"}
+        {buttonLable}
       </button>
     </div>
   );

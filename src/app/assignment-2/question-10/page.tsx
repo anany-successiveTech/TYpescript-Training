@@ -6,6 +6,7 @@ import {
   LanguageContext,
 } from "@/context/LanguageProvider";
 import "@/app/styles/lang.css";
+import translations from "./traslation";
 
 // Define a type for supported languages
 type Language = "en" | "es";
@@ -16,19 +17,7 @@ interface TranslationText {
   paragraph: string;
 }
 
-// Define the full translation object
-const translations: Record<Language, TranslationText> = {
-  en: {
-    title: "Enter Something",
-    paragraph:
-      "Develop a language switcher application using the useContext hook. Use the buttons below to switch languages.",
-  },
-  es: {
-    title: "Ingresa algo",
-    paragraph:
-      "Desarrolla una aplicación de cambio de idioma usando el hook useContext. Usa los botones abajo para cambiar el idioma.",
-  },
-};
+
 
 const PageContent: React.FC = () => {
   const { language, switchLanguage } = useContext(LanguageContext);

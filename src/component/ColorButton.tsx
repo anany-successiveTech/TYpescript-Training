@@ -1,8 +1,8 @@
 import React from "react";
 
 type ColorProps = {
-  text: string,
-  color: string
+  text: string | null,
+  color: string | null
 }
 
 const ColorButton = ({ text, color }:ColorProps) => {
