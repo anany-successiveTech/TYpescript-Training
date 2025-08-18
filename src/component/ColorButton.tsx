@@ -1,0 +1,22 @@
+import React from "react";
+
+type ColorProps = {
+  text: string | null,
+  color: string | null
+}
+
+const ColorButton = ({ text, color }:ColorProps) => {
+  const style = {
+    backgroundColor: color || "gray",
+    color: "#fff",
+    padding: "2rem 2rem",
+    border: "none",
+    borderRadius: "5px",
+    fontSize: "16px",
+    cursor: "pointer",
+    width: "90%"
+  };
+  return <button style={style}>{text || "Click me"}</button>
+};
+
+export default ColorButton;

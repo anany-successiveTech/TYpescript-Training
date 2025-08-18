@@ -50,3 +50,60 @@
 .button-wrapper {
   margin-top: 0.5rem;
 }
+
+.light .container {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 500px;
+  margin: 2rem;
+  text-align: center;
+  color: #1e1e1e; /* dark text for light background */
+}
+
+.light .colour {
+  display: flex;
+  justify-content: center;
+}
+
+.light .description {
+  text-align: center;
+  margin: 1.5rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+.light .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.light .input-group input {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  font-size: large;
+  color: #1e1e1e;
+}
+
+.light .input-group input::placeholder {
+  color: #888;
+}
+
+.light .input-field {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  background-color: #fff;
+  color: #1e1e1e;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.light .button-wrapper {
+  margin-top: 0.5rem;
+}

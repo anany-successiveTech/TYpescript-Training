@@ -1,0 +1,90 @@
+/* ====== Main Container ====== */
+.ttt-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ttt-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 0.25rem;
+}
+
+.ttt-header p,
+.ttt-header .MuiTypography-root {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* ====== Game Board ====== */
+.ttt-game-container {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 1rem; /* Equal vertical + horizontal spacing */
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.ttt-game-container button {
+  width: 100px;
+  height: 100px;
+  font-size: 2rem;
+  font-weight: 600;
+  background-color: #f5f5f5;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ttt-game-container button:hover:not(:disabled) {
+  background-color: #e6e6e6;
+  border-color: #999;
+}
+
+.ttt-game-container button:disabled {
+  cursor: not-allowed;
+  color: #aaa;
+  background-color: #fafafa;
+  border-color: #ddd;
+}
+
+/* ====== Controls ====== */
+.ttt-controls {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.ttt-controls button {
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: #4285f4;
+  border: none;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.ttt-controls button:hover {
+  background-color: #356ac0;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 480px) {
+  .ttt-game-container {
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+    gap: 0.75rem;
+  }
+
+  .ttt-game-container button {
+    width: 70px;
+    height: 70px;
+    font-size: 1.5rem;
+  }
+}
